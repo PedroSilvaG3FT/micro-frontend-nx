@@ -20,6 +20,11 @@ import { RouterModule } from '@angular/router';
           path: '',
           component: NxWelcomeComponent,
         },
+        {
+          path: 'user',
+          loadChildren: () =>
+            import('user/Module').then((m) => m.RemoteEntryModule),
+        },
       ],
       { initialNavigation: 'enabledBlocking' }
     ),

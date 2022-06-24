@@ -3,6 +3,7 @@
   "version": 2,
   "projects": {
     "shell": "apps/shell",
-    "todo": "apps/todo"
+    "todo": "apps/todo",
+    "user": "apps/user"
   }
 }
