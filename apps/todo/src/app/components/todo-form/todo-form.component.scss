@@ -1,0 +1,15 @@
+#todoForm {
+  @apply mb-12 flex justify-center;
+
+  > input {
+    @apply w-full h-10 py-1 px-6 block rounded-l-md border border-solid;
+
+    &:focus {
+      outline: none !important;
+    }
+  }
+
+  > button {
+    @apply h-10 px-4 rounded-r-md border border-l-0 border-solid;
+  }
+}

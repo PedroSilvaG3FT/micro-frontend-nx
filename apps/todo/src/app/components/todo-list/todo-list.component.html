@@ -1,0 +1,19 @@
+<article id="todoList">
+  <table>
+    <thead>
+      <tr>
+        <th>Task</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td width="40%">{{ item }}</td>
+        <td width="20%">
+          <button>Add to Home</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</article>
