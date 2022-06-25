@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserFacade } from '@nx-micro-app/shared/store';
 
 @Component({
   selector: 'nx-micro-app-root',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'shell';
+  constructor(private userFacade: UserFacade) {}
+
+  ngOnInit() {
+    this.userFacade.init();
+  }
 }

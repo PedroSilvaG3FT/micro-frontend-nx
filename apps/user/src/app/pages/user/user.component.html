@@ -20,7 +20,9 @@
           <td width="40%">{{ user.name }}</td>
           <td width="40%">{{ user.email }}</td>
           <td width="20%">
-            <button>Add to Home</button>
+            <button (click)="toggleSelect(user)">
+              {{ buttonLabel(user.email) }}
+            </button>
           </td>
         </tr>
       </tbody>

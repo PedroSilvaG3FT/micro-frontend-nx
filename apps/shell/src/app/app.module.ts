@@ -8,10 +8,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { NxWelcomeComponent } from './nx-welcome.component';
 import { RouterModule } from '@angular/router';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { UserFacade, UserStoreModule } from '@nx-micro-app/shared/store';
 
 @NgModule({
   declarations: [AppComponent, ...pages, ...components, NxWelcomeComponent],
   imports: [
+    UserStoreModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
     BrowserModule,
     RouterModule.forRoot(
       [
@@ -30,7 +36,7 @@ import { RouterModule } from '@angular/router';
       { initialNavigation: 'enabledBlocking' }
     ),
   ],
-  providers: [],
+  providers: [UserFacade],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
