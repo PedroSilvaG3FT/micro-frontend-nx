@@ -1,0 +1,12 @@
+#appHeader {
+  @apply h-[80px] flex items-center justify-center shadow-sm rounded-b-lg;
+  background: #f5f5f5;
+
+  > a {
+    @apply px-10 py-2 rounded-md;
+
+    &:hover {
+      @apply bg-white shadow-lg;
+    }
+  }
+}

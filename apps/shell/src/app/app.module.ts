@@ -1,3 +1,7 @@
+import pages from './pages';
+import routes from './routes';
+import components from './components';
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -6,19 +10,16 @@ import { NxWelcomeComponent } from './nx-welcome.component';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [AppComponent, NxWelcomeComponent],
+  declarations: [AppComponent, ...pages, ...components, NxWelcomeComponent],
   imports: [
     BrowserModule,
     RouterModule.forRoot(
       [
+        ...routes,
         {
           path: 'todo',
           loadChildren: () =>
             import('todo/Module').then((m) => m.RemoteEntryModule),
-        },
-        {
-          path: '',
-          component: NxWelcomeComponent,
         },
         {
           path: 'user',

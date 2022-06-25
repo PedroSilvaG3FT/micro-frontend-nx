@@ -1,0 +1,29 @@
+<section id="user">
+  <nav>
+    User List
+
+    <button>ADD</button>
+  </nav>
+
+  <article>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td width="40%">{{ user.name }}</td>
+          <td width="40%">{{ user.email }}</td>
+          <td width="20%">
+            <button>Add to Home</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </article>
+</section>

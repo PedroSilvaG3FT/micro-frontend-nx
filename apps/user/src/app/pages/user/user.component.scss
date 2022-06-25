@@ -1,0 +1,37 @@
+#user {
+  @apply h-[80vh] flex flex-col items-center justify-center;
+
+  > nav {
+    @apply mb-12 w-[80vw] flex justify-between items-center;
+  }
+
+  > article {
+    @apply relative overflow-x-auto shadow-md sm:rounded-lg;
+
+    > table {
+      @apply w-[80vw] text-sm text-left text-gray-500 dark:text-gray-400;
+
+      > thead {
+        @apply text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400;
+
+        th {
+          @apply px-6 py-3;
+        }
+      }
+
+      > tbody {
+        > tr {
+          @apply bg-white border-b dark:bg-gray-800 dark:border-gray-700;
+
+          > td {
+            @apply px-6 py-4;
+
+            &:last-of-type {
+              @apply text-right;
+            }
+          }
+        }
+      }
+    }
+  }
+}
