@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TodoFacade } from '@nx-micro-app/shared/store';
 
 @Component({
   selector: 'app-home',
@@ -8,11 +9,20 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   public todoItems: String[] = [];
 
-  constructor() {}
+  constructor(private todoFacade: TodoFacade) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.initList();
+  }
 
   onAdd(item: string): void {
     this.todoItems.push(item);
+    this.todoFacade.addTask(item);
+  }
+
+  initList() {
+    this.todoFacade.selectedTasks$.subscribe(
+      (response) => (this.todoItems = [...response])
+    );
   }
 }

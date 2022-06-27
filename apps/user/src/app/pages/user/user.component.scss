@@ -2,14 +2,14 @@
   @apply h-[80vh] flex flex-col items-center justify-center;
 
   > nav {
-    @apply mb-12 w-[80vw] flex justify-between items-center;
+    @apply mb-12 w-[40vw] flex justify-between items-center;
   }
 
   > article {
-    @apply relative overflow-x-auto shadow-md sm:rounded-lg;
+    @apply w-[40vw] relative overflow-x-auto shadow-md sm:rounded-lg;
 
     > table {
-      @apply w-[80vw] text-sm text-left text-gray-500 dark:text-gray-400;
+      @apply w-full text-sm text-left text-gray-500 dark:text-gray-400;
 
       > thead {
         @apply text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400;

@@ -10,11 +10,17 @@ import { NxWelcomeComponent } from './nx-welcome.component';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { UserFacade, UserStoreModule } from '@nx-micro-app/shared/store';
+import {
+  UserFacade,
+  TodoFacade,
+  UserStoreModule,
+  TodoStoreModule,
+} from '@nx-micro-app/shared/store';
 
 @NgModule({
   declarations: [AppComponent, ...pages, ...components, NxWelcomeComponent],
   imports: [
+    TodoStoreModule,
     UserStoreModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
@@ -36,7 +42,7 @@ import { UserFacade, UserStoreModule } from '@nx-micro-app/shared/store';
       { initialNavigation: 'enabledBlocking' }
     ),
   ],
-  providers: [UserFacade],
+  providers: [UserFacade, TodoFacade],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
