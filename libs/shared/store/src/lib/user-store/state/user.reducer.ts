@@ -2,26 +2,19 @@ import { cloneDeep } from 'lodash';
 import * as UserActions from './user.actions';
 import { createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
-import { State, UserAdapter, UserEntity } from './@types/state.interface';
+import { State, UserAdapter } from './@types/state.interface';
+import { UserStoreInterface } from './@types/user-store.interface';
+import { userMutations } from './user.mutations';
 
-export const userAdapter: UserAdapter = createEntityAdapter<UserEntity>();
+export const userAdapter: UserAdapter =
+  createEntityAdapter<UserStoreInterface>();
+
 export const initialState: State = userAdapter.getInitialState({ list: [] });
-
-const mutations = {
-  TOGGLE_SELECT: (state: State, { user }: any) => {
-    const currentState: State = cloneDeep(state);
-    const hasUser = currentState.list.some(({ email }) => email === user.email);
-
-    if (hasUser) return currentState;
-
-    currentState.list.push(user);
-    return currentState;
-  },
-};
 
 const userReducer = createReducer(
   initialState,
-  on(UserActions.toggleSelect, mutations.TOGGLE_SELECT)
+  on(UserActions.addUser, userMutations.ADD_USER),
+  on(UserActions.removeUser, userMutations.REMOVE_USER)
 );
 
 export function reducer(state: State | undefined, action: Action) {

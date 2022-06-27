@@ -1,14 +1,10 @@
 import { EntityAdapter, EntityState } from '@ngrx/entity';
+import { UserStoreInterface } from './user-store.interface';
 
 export const USER_FEATURE_KEY = 'user';
 
-export interface UserEntity {
-  name: string;
-  email: string;
+export interface State extends EntityState<UserStoreInterface> {
+  list: UserStoreInterface[];
 }
 
-export interface State extends EntityState<UserEntity> {
-  list: UserEntity[];
-}
-
-export type UserAdapter = EntityAdapter<UserEntity>;
+export type UserAdapter = EntityAdapter<UserStoreInterface>;

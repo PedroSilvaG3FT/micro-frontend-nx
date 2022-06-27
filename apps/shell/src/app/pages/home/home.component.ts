@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserFacade } from '@nx-micro-app/shared/store';
+import { UserStoreInterface } from 'libs/shared/store/src/lib/user-store/state/@types/user-store.interface';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,18 @@ import { UserFacade } from '@nx-micro-app/shared/store';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  public selectedUsers = this.userFacade.selectedUsers$;
+  public todoItems: any[] = ['TEST I', 'TEST II', 'TEST III', 'TEST IV'];
+  public selectedUsers: UserStoreInterface[] = [];
 
   constructor(private userFacade: UserFacade) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getSelectedUsers();
+  }
+
+  getSelectedUsers(): void {
+    this.userFacade.selectedUsers$.subscribe(
+      (users) => (this.selectedUsers = users)
+    );
+  }
 }

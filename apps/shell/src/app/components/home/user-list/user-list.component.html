@@ -1,5 +1,5 @@
-<section id="user">
-  <nav>User List</nav>
+<section id="userList">
+  User List
 
   <article>
     <table>
@@ -7,7 +7,6 @@
         <tr>
           <th>Name</th>
           <th>Email</th>
-          <th></th>
         </tr>
       </thead>
 
@@ -15,11 +14,6 @@
         <tr *ngFor="let user of users">
           <td width="40%">{{ user.name }}</td>
           <td width="40%">{{ user.email }}</td>
-          <td width="20%">
-            <button (click)="handleAction(user)">
-              {{ buttonLabel(user.email) }}
-            </button>
-          </td>
         </tr>
       </tbody>
     </table>

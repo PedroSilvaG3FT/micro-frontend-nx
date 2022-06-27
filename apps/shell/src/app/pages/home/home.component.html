@@ -1,9 +1,8 @@
 <section id="home">
   <h1>Welcome to micro-frontend</h1>
 
-  <ng-container *ngFor="let cat of selectedUsers | async">
-    <div class="child">
-      <h3>{{ cat | json }}</h3>
-    </div>
-  </ng-container>
+  <article>
+    <user-list [users]="selectedUsers"></user-list>
+    <todo-list [items]="todoItems"></todo-list>
+  </article>
 </section>

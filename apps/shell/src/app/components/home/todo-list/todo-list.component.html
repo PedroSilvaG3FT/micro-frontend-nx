@@ -1,0 +1,19 @@
+<section id="todoList">
+  Todo List
+
+  <article>
+    <table>
+      <thead>
+        <tr>
+          <th>Task</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of items">
+          <td>{{ item }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </article>
+</section>

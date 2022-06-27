@@ -4,6 +4,7 @@ import { select, Store } from '@ngrx/store';
 
 import * as UserActions from './user.actions';
 import * as UserSelectors from './user.selectors';
+import { UserStoreInterface } from './@types/user-store.interface';
 
 @Injectable()
 export class UserFacade {
@@ -19,7 +20,11 @@ export class UserFacade {
     );
   }
 
-  toggleSelectUser(user: any) {
-    this.store.dispatch(UserActions.toggleSelect({ user }));
+  addUser(user: UserStoreInterface) {
+    this.store.dispatch(UserActions.addUser({ user }));
+  }
+
+  removeUser(user: UserStoreInterface) {
+    this.store.dispatch(UserActions.removeUser({ user }));
   }
 }

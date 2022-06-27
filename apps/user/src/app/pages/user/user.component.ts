@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserFacade } from '@nx-micro-app/shared/store';
-import { interval, lastValueFrom, map, take } from 'rxjs';
+import { UserStoreInterface } from 'libs/shared/store/src/lib/user-store/state/@types/user-store.interface';
 
 @Component({
   selector: 'app-user',
@@ -8,7 +8,7 @@ import { interval, lastValueFrom, map, take } from 'rxjs';
   styleUrls: ['user.component.scss'],
 })
 export class UserComponent implements OnInit {
-  public selectedCats = this.userFacade.selectedUsers$;
+  public selectedUsers: UserStoreInterface[] = [];
   public users = [
     { name: 'John', email: 'john@test.com' },
     { name: 'Snow', email: 'snow@test.com' },
@@ -16,22 +16,29 @@ export class UserComponent implements OnInit {
 
   constructor(private userFacade: UserFacade) {}
 
-  ngOnInit() {
-    this.buttonLabel(this.users[0].email);
+  get isSelected(): (email: string) => boolean {
+    return (email) => this.selectedUsers.some((user) => user.email === email);
   }
 
-  toggleSelect(user: any) {
-    this.userFacade.toggleSelectUser(user);
-  }
-  async buttonLabel(email: string) {
-    console.log('START :', email);
-    const result$ = this.userFacade.hasUser(email);
-    const teste = await lastValueFrom(result$);
-
-    console.log('OOOOOOOPA', teste);
+  get buttonLabel(): (email: string) => string {
+    return (email) =>
+      this.isSelected(email) ? 'Remove from home' : 'Add to Home';
   }
 
-  isSelected(email: any) {
-    return this.userFacade.hasUser(email);
+  ngOnInit(): void {
+    this.getSelectedUsers();
+  }
+
+  getSelectedUsers(): void {
+    this.userFacade.selectedUsers$.subscribe(
+      (users) => (this.selectedUsers = users)
+    );
+  }
+
+  handleAction(user: any): void {
+    const hasUser = this.isSelected(user.email);
+
+    if (!hasUser) this.userFacade.addUser(user);
+    else this.userFacade.removeUser(user);
   }
 }
