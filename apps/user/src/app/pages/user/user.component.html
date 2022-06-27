@@ -1,9 +1,5 @@
 <section id="user">
-  <nav>
-    User List
-
-    <button>ADD</button>
-  </nav>
+  <nav>User List</nav>
 
   <article>
     <table>
@@ -21,7 +17,7 @@
           <td width="40%">{{ user.email }}</td>
           <td width="20%">
             <button (click)="toggleSelect(user)">
-              {{ buttonLabel(user.email) }}
+              {{ isSelected(user.email) | async }}
             </button>
           </td>
         </tr>

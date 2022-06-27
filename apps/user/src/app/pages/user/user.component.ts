@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserFacade } from '@nx-micro-app/shared/store';
+import { interval, lastValueFrom, map, take } from 'rxjs';
 
 @Component({
   selector: 'app-user',
@@ -15,25 +16,22 @@ export class UserComponent implements OnInit {
 
   constructor(private userFacade: UserFacade) {}
 
-  get buttonLabel(): (email: string) => string {
-    return (email) =>
-      this.userFacade.isCatSelected(email) ? 'Remove from Home' : 'Add to Home';
-  }
-
   ngOnInit() {
-    this.selectedCats.subscribe((response) => {
-      console.log(response);
-    });
+    this.buttonLabel(this.users[0].email);
   }
 
   toggleSelect(user: any) {
     this.userFacade.toggleSelectUser(user);
-
-    this.selectedCats.subscribe((response) => {
-      console.log(response);
-    });
   }
+  async buttonLabel(email: string) {
+    console.log('START :', email);
+    const result$ = this.userFacade.hasUser(email);
+    const teste = await lastValueFrom(result$);
+
+    console.log('OOOOOOOPA', teste);
+  }
+
   isSelected(email: any) {
-    return this.userFacade.isCatSelected(email);
+    return this.userFacade.hasUser(email);
   }
 }

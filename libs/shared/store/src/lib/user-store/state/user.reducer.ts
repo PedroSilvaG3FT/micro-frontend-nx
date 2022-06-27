@@ -3,14 +3,16 @@ import { createReducer, on, Action } from '@ngrx/store';
 
 import * as UserActions from './user.actions';
 import { UserEntity } from './user.models';
+import { cloneDeep } from 'lodash';
 
 export const USER_FEATURE_KEY = 'user';
 
 export interface State extends EntityState<UserEntity> {
-  selectedId?: string | number; // which User record has been selected
-  loaded: boolean; // has the User list been loaded
-  error?: string | null; // last known error (if any)
-  selectedUsers: Map<any, any>;
+  loaded: boolean;
+  list: UserEntity[];
+  error?: string | null;
+  selectedId?: string | number;
+  selectedUsers: any | Map<any, any>;
 }
 
 export interface UserPartialState {
@@ -21,28 +23,26 @@ export const userAdapter: EntityAdapter<UserEntity> =
   createEntityAdapter<UserEntity>();
 
 export const initialState: State = userAdapter.getInitialState({
-  // set initial required properties
   selectedUsers: new Map(),
   loaded: false,
+  list: [],
 });
+
+const mutations = {
+  TOGGLE_SELECT: (state: State, { user }: any) => {
+    const currentState: State = cloneDeep(state);
+    const hasUser = currentState.list.some(({ email }) => email === user.email);
+
+    if (hasUser) return currentState;
+
+    currentState.list.push(user);
+    return currentState;
+  },
+};
 
 const userReducer = createReducer(
   initialState,
-  on(UserActions.toggleSelect, (state, { user }) => {
-    console.log(user);
-    const newState: any = { ...state };
-    if (newState.selectedUsers.has(user.email)) {
-      newState.selectedUsers.delete(user.email);
-    } else {
-      newState.selectedUsers.set(user.email, user);
-    }
-    return newState;
-  }),
-  on(UserActions.init, (state) => ({ ...state, loaded: false, error: null })),
-  on(UserActions.loadUserSuccess, (state, { user }) =>
-    userAdapter.setAll(user, { ...state, loaded: true })
-  ),
-  on(UserActions.loadUserFailure, (state, { error }) => ({ ...state, error }))
+  on(UserActions.toggleSelect, mutations.TOGGLE_SELECT)
 );
 
 export function reducer(state: State | undefined, action: Action) {
