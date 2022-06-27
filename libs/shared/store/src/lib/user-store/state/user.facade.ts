@@ -7,9 +7,6 @@ import * as UserSelectors from './user.selectors';
 
 @Injectable()
 export class UserFacade {
-  // public loaded$ = this.store.pipe(select(UserSelectors.getUserLoaded));
-  // public allUser$ = this.store.pipe(select(UserSelectors.getAllUser));
-  // public selectedUser$ = this.store.pipe(select(UserSelectors.getSelected));
   public selectedUsers$ = this.store.pipe(
     select(UserSelectors.getSelectedUsers)
   );

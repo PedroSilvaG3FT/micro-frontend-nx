@@ -1,32 +1,11 @@
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { createReducer, on, Action } from '@ngrx/store';
-
-import * as UserActions from './user.actions';
-import { UserEntity } from './user.models';
 import { cloneDeep } from 'lodash';
+import * as UserActions from './user.actions';
+import { createEntityAdapter } from '@ngrx/entity';
+import { createReducer, on, Action } from '@ngrx/store';
+import { State, UserAdapter, UserEntity } from './@types/state.interface';
 
-export const USER_FEATURE_KEY = 'user';
-
-export interface State extends EntityState<UserEntity> {
-  loaded: boolean;
-  list: UserEntity[];
-  error?: string | null;
-  selectedId?: string | number;
-  selectedUsers: any | Map<any, any>;
-}
-
-export interface UserPartialState {
-  readonly [USER_FEATURE_KEY]: State;
-}
-
-export const userAdapter: EntityAdapter<UserEntity> =
-  createEntityAdapter<UserEntity>();
-
-export const initialState: State = userAdapter.getInitialState({
-  selectedUsers: new Map(),
-  loaded: false,
-  list: [],
-});
+export const userAdapter: UserAdapter = createEntityAdapter<UserEntity>();
+export const initialState: State = userAdapter.getInitialState({ list: [] });
 
 const mutations = {
   TOGGLE_SELECT: (state: State, { user }: any) => {
