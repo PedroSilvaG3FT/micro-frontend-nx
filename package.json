@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "test": "nx test",
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test",
-    "dev": "nx serve shell",
+    "dev": "nx run shell:serve",
+    "dev:auth": "nx run auth:serve",
     "dev:todo": "nx run todo:serve",
     "dev:user": "nx run user:serve",
-    "dev:shell": "nx run shell:serve",
     "postinstall": "ngcc --properties es2020 browser module main"
   },
   "private": true,

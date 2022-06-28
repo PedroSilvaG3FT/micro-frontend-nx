@@ -38,6 +38,11 @@ import {
           loadChildren: () =>
             import('user/Module').then((m) => m.RemoteEntryModule),
         },
+        {
+          path: 'auth',
+          loadChildren: () =>
+            import('auth/Module').then((m) => m.RemoteEntryModule),
+        },
       ],
       { initialNavigation: 'enabledBlocking' }
     ),

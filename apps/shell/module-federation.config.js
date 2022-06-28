@@ -1,4 +1,4 @@
 module.exports = {
   name: 'shell',
-  remotes: ['todo', 'user'],
+  remotes: ['todo', 'user', 'auth'],
 };
