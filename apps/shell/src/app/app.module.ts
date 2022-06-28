@@ -3,6 +3,7 @@ import routes from './routes';
 import components from './components';
 
 import { NgModule } from '@angular/core';
+import { SharedModule } from 'libs/shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -16,10 +17,12 @@ import {
   UserStoreModule,
   TodoStoreModule,
 } from '@nx-micro-app/shared/store';
+import { AuthGuard } from 'libs/shared/guards/auth.guard';
 
 @NgModule({
   declarations: [AppComponent, ...pages, ...components, NxWelcomeComponent],
   imports: [
+    SharedModule,
     TodoStoreModule,
     UserStoreModule,
     StoreModule.forRoot({}),
@@ -35,6 +38,7 @@ import {
         },
         {
           path: 'user',
+          canActivateChild: [AuthGuard],
           loadChildren: () =>
             import('user/Module').then((m) => m.RemoteEntryModule),
         },
