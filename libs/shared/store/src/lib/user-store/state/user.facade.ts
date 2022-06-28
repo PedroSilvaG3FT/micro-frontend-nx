@@ -1,10 +1,11 @@
-import { map } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 
 import * as UserActions from './user.actions';
 import * as UserSelectors from './user.selectors';
+import { USER_FEATURE_KEY } from './@types/state.interface';
 import { UserStoreInterface } from './@types/user-store.interface';
+import { PersistService } from '../../../services/persist.service';
 
 @Injectable()
 export class UserFacade {
@@ -12,12 +13,13 @@ export class UserFacade {
     select(UserSelectors.getSelectedUsers)
   );
 
-  constructor(private readonly store: Store) {}
+  constructor(
+    private readonly store: Store,
+    private persistService: PersistService
+  ) {}
 
-  hasUser(email: string) {
-    return this.selectedUsers$.pipe(
-      map((users) => users.some((user) => user.email === email))
-    );
+  getState() {
+    return this.persistService.getState(USER_FEATURE_KEY);
   }
 
   addUser(user: UserStoreInterface) {

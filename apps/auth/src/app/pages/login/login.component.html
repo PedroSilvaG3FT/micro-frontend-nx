@@ -1,3 +1,20 @@
 <section id="login">
-  <h1>Login</h1>
+  <form id="todoForm" #taskForm="ngForm" (ngSubmit)="handleSubmit()">
+    <input
+      required
+      type="text"
+      name="email"
+      placeholder="Email"
+      [(ngModel)]="authForm.email"
+    />
+    <input
+      required
+      type="password"
+      name="password"
+      placeholder="Password"
+      [(ngModel)]="authForm.password"
+    />
+
+    <button type="submit" [disabled]="!taskForm.form.valid">Login</button>
+  </form>
 </section>

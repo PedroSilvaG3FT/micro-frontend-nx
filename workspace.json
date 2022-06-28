@@ -2,11 +2,11 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "auth": "apps/auth",
-    "auth-e2e": "apps/auth-e2e",
-    "shared-store": "libs/shared/store",
-    "shell": "apps/shell",
     "todo": "apps/todo",
-    "user": "apps/user"
+    "user": "apps/user",
+    "auth": "apps/auth",
+    "shell": "apps/shell",
+    "auth-e2e": "apps/auth-e2e",
+    "shared-store": "libs/shared/store"
   }
 }

@@ -12,8 +12,10 @@ import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import {
+  AuthFacade,
   UserFacade,
   TodoFacade,
+  AuthStoreModule,
   UserStoreModule,
   TodoStoreModule,
 } from '@nx-micro-app/shared/store';
@@ -25,6 +27,7 @@ import { AuthGuard } from 'libs/shared/guards/auth.guard';
     SharedModule,
     TodoStoreModule,
     UserStoreModule,
+    AuthStoreModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     BrowserModule,
@@ -52,7 +55,7 @@ import { AuthGuard } from 'libs/shared/guards/auth.guard';
       { initialNavigation: 'enabledBlocking' }
     ),
   ],
-  providers: [UserFacade, TodoFacade],
+  providers: [UserFacade, TodoFacade, AuthFacade],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

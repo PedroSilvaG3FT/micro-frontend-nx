@@ -1,22 +1,21 @@
 import { cloneDeep } from 'lodash';
-import { State } from './@types/state.interface';
 import { TaskAction } from './@types/actions.interface';
+import { State, TODO_FEATURE_KEY } from './@types/state.interface';
+import { PersistService } from '../../../services/persist.service';
+
+const persistService = new PersistService();
 
 export const taskMutations = {
   ADD_TASK: (state: State, { task }: TaskAction) => {
     const currentState: State = cloneDeep(state);
-    const hasUser = currentState.list.some((item) => item === task);
-
-    if (hasUser) return currentState;
     currentState.list.push(task);
-
-    return currentState;
+    return persistService.persist(TODO_FEATURE_KEY, currentState);
   },
   REMOVE_TASK: (state: State, { task }: TaskAction) => {
     const currentState: State = cloneDeep(state);
     const newList = currentState.list.filter((item) => item !== task);
 
     currentState.list = newList;
-    return currentState;
+    return persistService.persist(TODO_FEATURE_KEY, currentState);
   },
 };

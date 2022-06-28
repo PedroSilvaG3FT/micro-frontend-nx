@@ -1,15 +1,25 @@
-import { cloneDeep } from 'lodash';
 import * as UserActions from './user.actions';
+import { userMutations } from './user.mutations';
 import { createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
-import { State, UserAdapter } from './@types/state.interface';
 import { UserStoreInterface } from './@types/user-store.interface';
-import { userMutations } from './user.mutations';
+import { PersistService } from '../../../services/persist.service';
+import {
+  State,
+  UserAdapter,
+  USER_FEATURE_KEY,
+  UserStateInterface,
+} from './@types/state.interface';
+
+const persistService = new PersistService();
+const initialStateDTO = persistService.getInitialState<UserStateInterface>(
+  USER_FEATURE_KEY,
+  { list: [] }
+);
 
 export const userAdapter: UserAdapter =
   createEntityAdapter<UserStoreInterface>();
-
-export const initialState: State = userAdapter.getInitialState({ list: [] });
+export const initialState: State = userAdapter.getInitialState(initialStateDTO);
 
 const userReducer = createReducer(
   initialState,

@@ -10,6 +10,7 @@
     "dev:auth": "nx run auth:serve",
     "dev:todo": "nx run todo:serve",
     "dev:user": "nx run user:serve",
+    "dev:libs": "nx run shared-store:serve",
     "postinstall": "ngcc --properties es2020 browser module main"
   },
   "private": true,
