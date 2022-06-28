@@ -33,6 +33,7 @@ import { AuthGuard } from 'libs/shared/guards/auth.guard';
         ...routes,
         {
           path: 'todo',
+          canActivateChild: [AuthGuard],
           loadChildren: () =>
             import('todo/Module').then((m) => m.RemoteEntryModule),
         },
