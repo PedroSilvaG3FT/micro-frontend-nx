@@ -11,11 +11,10 @@ import {
   UserStateInterface,
 } from './@types/state.interface';
 
-const persistService = new PersistService();
-const initialStateDTO = persistService.getInitialState<UserStateInterface>(
-  USER_FEATURE_KEY,
-  { list: [] }
-);
+const persistService = new PersistService(USER_FEATURE_KEY);
+const initialStateDTO = persistService.getInitialState<UserStateInterface>({
+  list: [],
+});
 
 export const userAdapter: UserAdapter =
   createEntityAdapter<UserStoreInterface>();

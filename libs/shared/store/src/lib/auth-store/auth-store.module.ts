@@ -4,7 +4,6 @@ import * as from from './state/auth.reducer';
 import { CommonModule } from '@angular/common';
 import { AuthFacade } from './state/auth.facade';
 import { FEATURE_KEY } from './state/@types/state.interface';
-import { PersistService } from '../../services/persist.service';
 
 @NgModule({
   declarations: [],

@@ -3,7 +3,7 @@ import { AddUserAction } from './@types/actions.interface';
 import { State, USER_FEATURE_KEY } from './@types/state.interface';
 import { PersistService } from '../../../services/persist.service';
 
-const persistService = new PersistService();
+const persistService = new PersistService(USER_FEATURE_KEY);
 
 export const userMutations = {
   ADD_USER: (state: State, { user }: AddUserAction) => {
@@ -12,7 +12,7 @@ export const userMutations = {
     if (hasUser) return currentState;
     currentState.list.push(user);
 
-    return persistService.persist(USER_FEATURE_KEY, currentState);
+    return persistService.persist(currentState);
   },
   REMOVE_USER: (state: State, { user }: AddUserAction) => {
     const currentState: State = cloneDeep(state);
@@ -21,6 +21,6 @@ export const userMutations = {
     );
 
     currentState.list = newList;
-    return persistService.persist(USER_FEATURE_KEY, currentState);
+    return persistService.persist(currentState);
   },
 };

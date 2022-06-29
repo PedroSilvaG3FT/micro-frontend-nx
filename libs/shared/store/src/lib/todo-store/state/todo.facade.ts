@@ -12,13 +12,12 @@ export class TodoFacade {
     select(TodoSelectors.getSelectedTasks)
   );
 
-  constructor(
-    private readonly store: Store,
-    private persistService: PersistService
-  ) {}
+  private persistService: PersistService = new PersistService(TODO_FEATURE_KEY);
+
+  constructor(private readonly store: Store) {}
 
   getState() {
-    return this.persistService.getState(TODO_FEATURE_KEY);
+    return this.persistService.getState();
   }
 
   addTask(task: string) {

@@ -10,13 +10,10 @@ import {
   TodoStateInterface,
 } from './@types/state.interface';
 
-const persistService = new PersistService();
-const initialStateDTO = persistService.getInitialState<TodoStateInterface>(
-  TODO_FEATURE_KEY,
-  {
-    list: [],
-  }
-);
+const persistService = new PersistService(TODO_FEATURE_KEY);
+const initialStateDTO = persistService.getInitialState<TodoStateInterface>({
+  list: [],
+});
 
 export const userAdapter: UserAdapter = createEntityAdapter<String>();
 export const initialState: State = userAdapter.getInitialState(initialStateDTO);

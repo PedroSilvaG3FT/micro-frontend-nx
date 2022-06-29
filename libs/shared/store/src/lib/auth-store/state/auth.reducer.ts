@@ -11,14 +11,11 @@ import {
   AuthStateInterface,
 } from './@types/state.interface';
 
-const persistService = new PersistService();
-const initialStateDTO = persistService.getInitialState<AuthStateInterface>(
-  FEATURE_KEY,
-  {
-    user: {} as AuthInterface,
-    token: '',
-  }
-);
+const persistService = new PersistService(FEATURE_KEY);
+const initialStateDTO = persistService.getInitialState<AuthStateInterface>({
+  user: {} as AuthInterface,
+  token: '',
+});
 
 export const authAdapter: AuthAdapter = createEntityAdapter<AuthInterface>();
 export const initialState: State = authAdapter.getInitialState(initialStateDTO);

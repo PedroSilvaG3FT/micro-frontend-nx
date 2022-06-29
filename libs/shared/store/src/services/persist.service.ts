@@ -1,26 +1,24 @@
-import { Injectable } from '@angular/core';
 import { StorageService } from 'libs/shared/services/_storage.service';
 
-@Injectable({ providedIn: 'root' })
 export class PersistService {
   private storageService: StorageService = new StorageService();
 
-  constructor() {}
+  constructor(private key: string) {}
 
-  getInitialState<Data>(key: string, model: Data): Data {
-    const state = this.getState(key);
+  getInitialState<Data>(model: Data): Data {
+    const state = this.getState();
     const hasState = !!Object.keys(state).length;
 
     if (hasState) return state;
     else return model;
   }
-  getState(key: string) {
-    const storage = this.storageService.get(key);
+  getState() {
+    const storage = this.storageService.get(this.key);
     if (storage) return JSON.parse(storage);
     else return {};
   }
-  persist(key: string, value: any) {
-    this.storageService.set(key, JSON.stringify(value));
+  persist(value: any) {
+    this.storageService.set(this.key, JSON.stringify(value));
     return value;
   }
 }

@@ -10,14 +10,12 @@ import { AuthInterface, FEATURE_KEY } from './@types/state.interface';
 export class AuthFacade {
   public getUser$ = this.store.pipe(select(selectors.getUser));
   public getToken$ = this.store.pipe(select(selectors.getToken));
+  private persistService: PersistService = new PersistService(FEATURE_KEY);
 
-  constructor(
-    private readonly store: Store,
-    private persistService: PersistService
-  ) {}
+  constructor(private readonly store: Store) {}
 
   getState() {
-    return this.persistService.getState(FEATURE_KEY);
+    return this.persistService.getState();
   }
 
   setUser(user: AuthInterface) {

@@ -13,13 +13,12 @@ export class UserFacade {
     select(UserSelectors.getSelectedUsers)
   );
 
-  constructor(
-    private readonly store: Store,
-    private persistService: PersistService
-  ) {}
+  private persistService: PersistService = new PersistService(USER_FEATURE_KEY);
+
+  constructor(private readonly store: Store) {}
 
   getState() {
-    return this.persistService.getState(USER_FEATURE_KEY);
+    return this.persistService.getState();
   }
 
   addUser(user: UserStoreInterface) {
