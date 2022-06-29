@@ -1,9 +1,9 @@
 import { StorageService } from 'libs/shared/services/_storage.service';
 
-export class PersistService {
-  private storageService: StorageService = new StorageService();
-
-  constructor(private key: string) {}
+export class PersistService extends StorageService {
+  constructor(private key: string) {
+    super();
+  }
 
   getInitialState<Data>(model: Data): Data {
     const state = this.getState();
@@ -13,12 +13,12 @@ export class PersistService {
     else return model;
   }
   getState() {
-    const storage = this.storageService.get(this.key);
+    const storage = this.get(this.key);
     if (storage) return JSON.parse(storage);
     else return {};
   }
   persist(value: any) {
-    this.storageService.set(this.key, JSON.stringify(value));
+    this.set(this.key, JSON.stringify(value));
     return value;
   }
 }
