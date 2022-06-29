@@ -5,10 +5,6 @@ import components from './components';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
 import {
   AuthFacade,
   UserFacade,
@@ -17,17 +13,27 @@ import {
   UserStoreModule,
   TodoStoreModule,
 } from '@nx-micro-app/shared/store';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { AppComponent } from './app.component';
+import { RouterModule } from '@angular/router';
 import { AuthGuard } from 'libs/shared/guards/auth.guard';
 
+export const imports = [
+  BrowserModule,
+  TodoStoreModule,
+  UserStoreModule,
+  AuthStoreModule,
+  StoreModule.forRoot({}),
+  EffectsModule.forRoot([]),
+];
+export const providers = [UserFacade, TodoFacade, AuthFacade];
+export const declarations = [AppComponent, ...pages, ...components];
 @NgModule({
-  declarations: [AppComponent, ...pages, ...components],
+  providers,
+  declarations,
   imports: [
-    TodoStoreModule,
-    UserStoreModule,
-    AuthStoreModule,
-    StoreModule.forRoot({}),
-    EffectsModule.forRoot([]),
-    BrowserModule,
+    ...imports,
     RouterModule.forRoot(
       [
         ...routes,
@@ -52,7 +58,6 @@ import { AuthGuard } from 'libs/shared/guards/auth.guard';
       { initialNavigation: 'enabledBlocking' }
     ),
   ],
-  providers: [UserFacade, TodoFacade, AuthFacade],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
