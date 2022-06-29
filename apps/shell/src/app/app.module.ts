@@ -3,14 +3,12 @@ import routes from './routes';
 import components from './components';
 
 import { NgModule } from '@angular/core';
-import { SharedModule } from 'libs/shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
-import { NxWelcomeComponent } from './nx-welcome.component';
-import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { AppComponent } from './app.component';
+import { RouterModule } from '@angular/router';
 import {
   AuthFacade,
   UserFacade,
@@ -22,9 +20,8 @@ import {
 import { AuthGuard } from 'libs/shared/guards/auth.guard';
 
 @NgModule({
-  declarations: [AppComponent, ...pages, ...components, NxWelcomeComponent],
+  declarations: [AppComponent, ...pages, ...components],
   imports: [
-    SharedModule,
     TodoStoreModule,
     UserStoreModule,
     AuthStoreModule,
