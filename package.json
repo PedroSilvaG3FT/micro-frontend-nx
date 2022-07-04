@@ -7,10 +7,10 @@
     "start": "nx serve",
     "build": "nx build",
     "dev": "nx run shell:serve",
+    "dev:all": "nx serve shell --open --devRemotes=auth,todo,user",
     "dev:auth": "nx run auth:serve",
     "dev:todo": "nx run todo:serve",
     "dev:user": "nx run user:serve",
-    "dev:libs": "nx run shared-store:serve",
     "postinstall": "ngcc --properties es2020 browser module main"
   },
   "private": true,

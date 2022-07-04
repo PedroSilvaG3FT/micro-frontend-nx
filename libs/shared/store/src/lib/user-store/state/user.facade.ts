@@ -18,6 +18,7 @@ export class UserFacade {
   constructor(private readonly store: Store) {}
 
   getState() {
+    console.log('TESSSET');
     return this.persistService.getState();
   }
 

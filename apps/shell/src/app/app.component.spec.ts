@@ -24,3 +24,5 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('shell');
   });
 });
+
+// 3 partes | angular 11 |

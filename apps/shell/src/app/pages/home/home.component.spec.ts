@@ -4,8 +4,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { declarations, imports, providers } from '../../app.module';
 
 describe('HomeComponent', () => {
-  let hostComponentNE: Element;
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [...imports, RouterTestingModule],

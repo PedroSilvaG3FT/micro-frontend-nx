@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UserStoreInterface } from 'libs/shared/store/src/lib/user-store/state/@types/user-store.interface';
 
 @Component({
   selector: 'todo-list',

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { TodoFacade, UserFacade } from '@nx-micro-app/shared/store';
 import { UserStoreInterface } from 'libs/shared/store/src/lib/user-store/state/@types/user-store.interface';
 
@@ -8,6 +8,10 @@ import { UserStoreInterface } from 'libs/shared/store/src/lib/user-store/state/@
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  @HostListener('window:scroll', ['$event'])
+  handleKeyDown(event: any) {
+    console.log('On Scroll Event', event);
+  }
   public todoItems: String[] = [];
   public selectedUsers: UserStoreInterface[] = [];
 
